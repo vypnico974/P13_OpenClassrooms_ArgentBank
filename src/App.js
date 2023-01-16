@@ -5,6 +5,7 @@ import Header from "./components/Header/Header"
 import Footer from "./components/Footer/Footer"
 //pages
 import Home from "./pages/Home/Home"
+import Login from "./pages/Login/Login"
 import Error from "./pages/Error/Error"
 //CSS
 import './styles/normalize.css'
@@ -24,6 +25,7 @@ export default function App() {
     <Header/>
     <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<Error />} />
     </Routes>
     <Footer text="Copyright 2020 Argent Bank" />

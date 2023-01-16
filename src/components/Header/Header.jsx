@@ -1,9 +1,10 @@
+//CSS
 import styles from './header.module.css'
 // components
 import {Link} from "react-router-dom"
 import { useSelector} from "react-redux"
-import { getFirstName } from "../../redux/features/firstName"
-import { token } from "../../redux/features/token"
+// import { getFirstName } from "../../redux/features/firstName"
+// import { token } from "../../redux/features/token"
 //logo
 import logo from '../../assets/argentBankLogo.png'
 
@@ -29,14 +30,25 @@ export default function Header() {
             </Link>
 
             <div>
-            <Link to='/' className={styles.mainNavItem}>
+            {/*user no connected*/}    
+            { token === null && 
+            <Link to='/login' className={styles.mainNavItem}>
                 <i className="fa fa-user-circle"></i>
                    <span className={styles.signIn}>Sign In</span>           
-            </Link>
-                {/* <a className={styles.mainNavItem} href="./sign-in.html">
-                <i class="fa fa-user-circle"></i>
-                Sign In
-                </a> */}
+            </Link> }
+            {/*user connected*/}  
+            { token !== null && 
+            <>
+                <Link to="/profil" className={styles.mainNavItem}>
+                    <i className="fa fa-user-circle"></i>
+                    {firstName}
+                </Link>
+                <Link to="/logout" className={styles.mainNavItem}>
+                    <i className="fa fa-sign-out"></i>
+                    Sign Out
+                </Link>
+            </>
+            }
             </div>
         </nav>
     )
