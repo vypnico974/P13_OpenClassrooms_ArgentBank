@@ -11,14 +11,13 @@ import { store } from "./redux/store"
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
+    {/*The Provider must encompass the entire store in application*/}
     <Provider store={store}>
       <BrowserRouter >
           <App />
         </BrowserRouter>
-    </Provider>
-      
-  </React.StrictMode>
- 
+    </Provider>      
+  </React.StrictMode> 
 )
 
 // If you want to start measuring performance in your app, pass a function

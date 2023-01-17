@@ -7,7 +7,9 @@ import Footer from "./components/Footer/Footer"
 import Home from "./pages/Home/Home"
 import Login from "./pages/Login/Login"
 import Error from "./pages/Error/Error"
-//CSS
+import Profil from "./pages/Profil/Profil"
+import Logout from "./pages/Logout/Logout"
+//css
 import './styles/normalize.css'
 import './styles/global.css'
 
@@ -26,6 +28,8 @@ export default function App() {
     <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profil" element={<Profil />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="*" element={<Error />} />
     </Routes>
     <Footer text="Copyright 2020 Argent Bank" />

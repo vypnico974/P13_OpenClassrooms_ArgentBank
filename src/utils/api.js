@@ -1,3 +1,4 @@
+// API base URL
 const BASE_URL = "http://localhost:3001/api/v1/"
 
 /**
@@ -32,44 +33,43 @@ export function getLoginData(data) {
  * @export
  * @description get login fetch
  * @param {object} 
- * @return {object} object
+ * @return {object} object login fetch format
  */
 export function getLoginFetchData(data) {
     if(data.body !== undefined) {
         const obj = {
+            id: data.body.id,
             status: data.status,
             email: data.body.email,
             firstName: data.body.firstName,
             lastName: data.body.lastName
         }
-
-        return obj;
+        return obj
     } else {
         const obj = {
+            id: null,
             status: 0,
             email: "",
             firstName: "",
             lastName: ""
-        }
-        
+        }   
+        console.log("user no connected")       
         return obj
     }
 }
 
-/* Save User Profil Data */
 /**
  * @function saveUserProfilData
  * @export
  * @description get login fetch
  * @param {object} 
- * @return {object} object
+ * @return {object} object user profil data format
  */
 export function saveUserProfilData(data) {
     const obj = {
         status: data.status,
         message: data.message,
     }
-
     return obj
 }
 
@@ -79,21 +79,48 @@ export function saveUserProfilData(data) {
  * @function getLogin
  * @export
  * @description get login
- * @param {object} 
+ * @param
  * @return {object} login response
  */
 export const getLogin = async (identifiants) => {
     const API_URL = BASE_URL + "user/login"
    // console.log(API_URL)
+   console.log("type :", typeof(identifiants))
 
     const loginResponse = await fetch(API_URL, {
+        method: "POST",
         body: JSON.stringify(identifiants),
         headers: {
             "Content-Type": "application/json",
-        },
-        method: "POST"
+        }
+        
     }).then((response) => response.json())
 
+  //  console.log("getLogin response", loginResponse)
     // response login format
-    return await getLoginData(loginResponse)
+    return await getLoginData(loginResponse) 
+}
+
+
+/**
+ * @function getLoginFetch
+ * @export
+ * @description data login user
+ * @param
+ * @return {object} login response
+ */
+export const getLoginFetch = async (token) => {
+    const API_URL = BASE_URL + "user/profile"
+
+    const loginFetchResponse = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer" + token
+        }        
+    }).then((response) => response.json())
+
+   // console.log("getLoginFetch response", loginFetchResponse)
+    // response login format
+    return await getLoginFetchData(loginFetchResponse)
 }
