@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 // last name initial state
 const initialState = {
     value: ""
-};
+}
 
 // slice : allows to define action and reducer for token
 export const lastNameSlice = createSlice({

@@ -1,11 +1,15 @@
+// proptypes
+import PropTypes from 'prop-types'
+
 // API base URL
 const BASE_URL = "http://localhost:3001/api/v1/"
+
 
 /**
  * @function getLoginData
  * @export
  * @description get login data
- * @param {object} 
+ * @param {object} data - data login
  * @return {object} object login data format
  */
 export function getLoginData(data) {
@@ -27,12 +31,16 @@ export function getLoginData(data) {
         return obj
     }
 }
+getLoginData.prototype = {
+    data: PropTypes.object.isRequired,
+}
+
 
 /**
  * @function getLoginFetchData
  * @export
  * @description get login fetch
- * @param {object} 
+ * @param {object}  data - user login fetch data
  * @return {object} object login fetch format
  */
 export function getLoginFetchData(data) {
@@ -46,6 +54,7 @@ export function getLoginFetchData(data) {
         }
         return obj
     } else {
+        console.log(data.status, data.status) 
         const obj = {
             id: null,
             status: 0,
@@ -53,16 +62,19 @@ export function getLoginFetchData(data) {
             firstName: "",
             lastName: ""
         }   
-        console.log("user no connected")       
-        return obj
+     return obj
     }
 }
+getLoginData.prototype = {
+    data: PropTypes.object.isRequired,
+}
+
 
 /**
  * @function saveUserProfilData
  * @export
  * @description get login fetch
- * @param {object} 
+ * @param {object}  data - save user profil data
  * @return {object} object user profil data format
  */
 export function saveUserProfilData(data) {
@@ -70,22 +82,24 @@ export function saveUserProfilData(data) {
         status: data.status,
         message: data.message,
     }
+    console.log(data.status, data.message )
     return obj
 }
-
+saveUserProfilData.prototype = {
+    data: PropTypes.object.isRequired,
+}
 
 
 /**
  * @function getLogin
  * @export
- * @description get login
- * @param
+ * @description get user login
+ * @param {object} identifiants - user identifiants 
  * @return {object} login response
  */
 export const getLogin = async (identifiants) => {
     const API_URL = BASE_URL + "user/login"
    // console.log(API_URL)
-   console.log("type :", typeof(identifiants))
 
     const loginResponse = await fetch(API_URL, {
         method: "POST",
@@ -96,20 +110,24 @@ export const getLogin = async (identifiants) => {
         
     }).then((response) => response.json())
 
-  //  console.log("getLogin response", loginResponse)
     // response login format
     return await getLoginData(loginResponse) 
 }
+saveUserProfilData.prototype = {
+    data: PropTypes.object.isRequired,
+}
+
 
 
 /**
  * @function getLoginFetch
  * @export
- * @description data login user
- * @param
+ * @description user login  fetch data
+ * @param {object} token - token 
  * @return {object} login response
  */
 export const getLoginFetch = async (token) => {
+   // console.log(typeof(token))
     const API_URL = BASE_URL + "user/profile"
 
     const loginFetchResponse = await fetch(API_URL, {
@@ -123,4 +141,34 @@ export const getLoginFetch = async (token) => {
    // console.log("getLoginFetch response", loginFetchResponse)
     // response login format
     return await getLoginFetchData(loginFetchResponse)
+}
+getLoginFetch.prototype = {
+    token: PropTypes.object.isRequired,
+}
+
+
+/**
+ * @function saveUserProfil
+ * @export
+ * @description save profil : user the new full name 
+ * @param {object} token - token 
+ * @return {object} login response
+ */
+export const saveUserProfil = async (token, fullName) => {
+    const URL_API = BASE_URL + "user/profile"
+
+    const saveUserProfilResponse = await fetch(URL_API, {
+        method: "PUT",
+        body: JSON.stringify(fullName),
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer" + token
+        }     
+    }).then((response) => response.json());
+
+     // response save user profil data format 
+    return await saveUserProfilData(saveUserProfilResponse)
+}
+saveUserProfil.prototype = {
+    token: PropTypes.object.isRequired,
 }

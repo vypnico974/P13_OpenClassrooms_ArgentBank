@@ -1,11 +1,10 @@
+/*  Login page styles  */
 .main {
     flex: 1;
-}
-  
+}  
 .bgDark {
     background-color: #12002b;
 }
-
 .signInContent {
     box-sizing: border-box;
     background-color: white;
@@ -15,31 +14,25 @@
     margin-bottom: 5rem;
     padding: 2rem;
 }
-
 .signInIcon {
     font-size: 5rem;
 }
-
 .container{
     display: flex;
 }
-
 .inputWrapper {
     display: flex;
     flex-direction: column;
     text-align: left;
     margin-bottom: 1rem;
 }
-
 .inputRemember {
     display: flex;
     margin-left:0.25rem;
 }
-
 .labelRemember {
     margin-left: 0.25rem;
 }
-
 .signInButton {
     display: block;
     width: 100%;
@@ -51,13 +44,13 @@
     background-color: #00bc77;
     color: #fff;
 }
-
 .bold{
     font-weight: bold;
 }
-
 .error{
     color:red;
+    font-weight: 700;
+    margin-top:1rem;
 }
 
 

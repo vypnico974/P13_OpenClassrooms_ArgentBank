@@ -1,20 +1,24 @@
 //css
 import styles from './login.module.css'
 
+import PropTypes from 'prop-types'
+
 import { useState} from "react" 
-import { useSelector,useDispatch } from "react-redux"
+import { Navigate } from "react-router-dom"
+
 import { getLogin } from '../../utils/api'
+
+import { useSelector,useDispatch } from "react-redux"
 import { getToken } from '../../redux/features/token'
-import { Navigate } from "react-router-dom";
+import { selectToken } from '../../redux/selectors'
 
 
 /**
  * @function Login
  * @export
  * @description page Login
- * @param
  * @return {HTMLElement} component generated HTML
- */
+*/
 export default function Login() {
 
     //use state
@@ -24,48 +28,68 @@ export default function Login() {
     const [loginErreur, setLoginErreur] = useState("")
     const [loginStatus, setLoginStatus] = useState(0)
 
-
     // Use Selector for recover :token (state)
-    const token = useSelector((state) => state.token.value)
-    // local storage Token
+    const token = useSelector(selectToken)
+    // Local storage Token
     const localStorageToken =  localStorage.getItem("token")
-   
 
-    // Add the token
-     const dispatch = useDispatch()
-     const tokenAdd = (token) => {
-         if(remember === true) {
-            localStorage.setItem("token", token)
-         }
-         //to send the action getToken
+    // use dispatch
+    const dispatch = useDispatch()
+
+    /**
+     * @function tokenAdd
+     * @description Save token in the local storage or send Token (state)
+     *  @param {object} event - event
+     * @return {}
+    */
+    const tokenAdd = (token) => {
+        if(remember === true) {
+           // Save token in the local storage web browser
+           localStorage.setItem("token", token)
+        }
+        //To send the action : getToken
         dispatch(getToken(token))
     }
-
-     // Handle Remember
+    tokenAdd.prototype = {
+        token: PropTypes.string.isRequired,
+    }
+     
+     /**
+     * @function handleRemember
+     * @description  handle remember
+     * @param {object} event - event
+     * @return {}
+    */
      const handleRemember = (event) => {
-        setRemember(event.target.checked);
+        setRemember(event.target.checked)
+    }
+    handleRemember.prototype = {
+        event: PropTypes.object.isRequired,
     }
 
     /**
-     * @function Login
-     * @export
+     * @function handleSubmit
      * @description  handle submit page Login
-     * @param {object}
+     * @param {object} event - form event
      * @return {HTMLElement} component generated HTML
     */
     const handleSubmit = (event) => {
         event.preventDefault()
         const login = getLogin({"email": email, "password": password})       
         login.then(obj => {
+             // no connection error to the web server
             if(obj.status !== 400) {
                 setLoginStatus(obj.status)
-                console.log("obj token :", obj.token)
+                // console.log("obj token :", obj.token)
                 tokenAdd(obj.token)
+             //connection error
             } else {
                 setLoginErreur(obj.message)
             }
-        })
-        console.log("login obj :", login)
+        }, [])
+    }
+    handleSubmit.prototype = {
+        event: PropTypes.object.isRequired,
     }
 
     //the conditions to redirect : profil page
@@ -85,8 +109,8 @@ export default function Login() {
                     <input type="text" id="username" onChange={e => setEmail(e.target.value)} />
                 </div>
                 <div className={styles.inputWrapper}>
-                <label className={styles.bold} htmlFor="password">Password</label>
-                <input type="password" id="password" onChange={e => setPassword(e.target.value)} />
+                    <label className={styles.bold} htmlFor="password">Password</label>
+                    <input type="password" id="password" onChange={e => setPassword(e.target.value)} />
                 </div>
                 <div className={styles.inputRemember}>
                     <input type="checkbox" id="remember-me" onChange={handleRemember}  />
@@ -95,23 +119,11 @@ export default function Login() {
                 {/* if login error, display error message  */}
                 <div className={styles.error}> {loginErreur}</div>
                 <button type="submit" className={styles.signInButton} >Sign In</button> 
-              </form>
-            
+              </form>            
             </section>
-
-
-
-
-        </main>
-
-
+          </main>
         </div>
-        
-
-
-
     )
-
 }
 
 

@@ -5,7 +5,7 @@ const initialState = {
     value: ""
 }
 
-// slice : allows to define action and reducer for token
+// slice : allows to define action and reducer for firstName
 export const firstNameSlice = createSlice({
     // slice name
     name: "firstName",

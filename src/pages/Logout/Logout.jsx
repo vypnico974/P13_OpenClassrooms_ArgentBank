@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Navigate } from "react-router-dom"
+
 import { getToken } from "../../redux/features/token"
 import { getFirstName } from "../../redux/features/firstName"
 import { getLastName } from "../../redux/features/lastName"
@@ -12,9 +13,6 @@ import { getLastName } from "../../redux/features/lastName"
  * @return {HTMLElement} return home page
  */
 export default function Logout() {
-    // Use Selector for recover :token (store)
-    // const token = useSelector((state) => state.token.value)
-    // if (token === 0) {<Navigate to="/" /> }
 
     const dispatch = useDispatch()
     useEffect(() => {

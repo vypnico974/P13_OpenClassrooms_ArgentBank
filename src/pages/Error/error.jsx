@@ -1,8 +1,8 @@
-/* react  */
-import React from "react"
-import { Link } from "react-router-dom"
 /* css  */
 import styles from './error.module.css'
+
+import { Link } from "react-router-dom"
+
 
 /**
  * @function Error

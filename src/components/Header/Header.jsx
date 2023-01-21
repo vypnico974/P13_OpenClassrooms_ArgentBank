@@ -1,39 +1,44 @@
 //CSS
 import styles from './header.module.css'
-// components
-import {Link} from "react-router-dom"
-import { useEffect } from "react";
-import { useSelector, useDispatch} from "react-redux"
-import { getFirstName } from "../../redux/features/firstName"
-// import { token } from "../../redux/features/token"
-// import { getToken } from '../../redux/features/token';
-import { getLoginFetch } from '../../utils/api'
 //logo
 import logo from '../../assets/argentBankLogo.png'
 
+import {Link} from "react-router-dom"
 
+import { useEffect } from "react";
+import { useSelector, useDispatch} from "react-redux"
+
+import { selectFirstName } from '../../redux/selectors'
+import { selectToken } from '../../redux/selectors';
+
+import { getFirstName } from "../../redux/features/firstName"
+import { getLoginFetch } from '../../utils/api'
+
+/**
+  * @function Header
+  * @export
+  * @description  component : header 
+  * @return {HTMLElement} component generated HTML
+*/
 export default function Header() {
 
-       // Use Selector
-       const firstName = useSelector((state) => state.firstName.value)
-       const token = useSelector((state) => state.token.value)
-       // local storage Token
-       const localStorageToken =  localStorage.getItem("token")
-       console.log("token header:", token )
-       console.log("localStorageToken:",localStorageToken)
+       // Use Selector for extract: firstName and token (state)
+       const firstName = useSelector(selectFirstName)
+       const token = useSelector(selectToken)
    
-   
-       // Use Effect
+       // Use dispatch
        const dispatch = useDispatch()
+       // Use Effect
        useEffect(() => {
            if((token !== 0 ) && (token !== null )) {
-              //
+              // Get data login user
                const user = getLoginFetch(token)
                user.then(obj => {
+                   //To send the action : getFirstName
                    dispatch(getFirstName(obj.firstName))
                })
            }
-       })
+       }, [token, dispatch])
 
     return (
         <nav className={styles.mainNav}>
@@ -58,7 +63,7 @@ export default function Header() {
             <>
                 <Link to="/profil" className={styles.mainNavItem}>
                     <i className="fa fa-user-circle"></i>
-                    {firstName}
+                  <span className={styles.user}> {firstName}</span>  
                 </Link>
                 <Link to="/logout" className={styles.mainNavItem}>
                     <i className="fa fa-sign-out"></i>

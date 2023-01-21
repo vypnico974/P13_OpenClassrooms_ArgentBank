@@ -1,6 +1,19 @@
+//css
 import styles from './hero.module.css'
 
+import PropTypes from 'prop-types'
 
+/**
+  * @function Hero
+  * @export
+  * @description  component : hero 
+  * @param {string} title - title
+  * @param {string} subtitle1 - subtitle 1
+  * @param {string} subtitle2 - subtitle 2
+  * @param {string} subtitle3 - subtitle 3
+  * @param {string} text - text
+  * @return {HTMLElement} component generated HTML
+*/
 export default function Hero({title,subtitle1,subtitle2,subtitle3,text}) {
     return (
         <div className={styles.hero}>
@@ -13,4 +26,11 @@ export default function Hero({title,subtitle1,subtitle2,subtitle3,text}) {
             </section>
         </div>
     )
+}
+Hero.prototype = {
+    title: PropTypes.string,
+    subtitle1: PropTypes.string,
+    subtitle2: PropTypes.string,
+    subtitle3: PropTypes.string,
+    text: PropTypes.string,
 }

@@ -1,15 +1,19 @@
+//css
 import styles from './feature.module.css'
 
 import PropTypes from 'prop-types'
 
 
 /**
-     * @function Feature
-     * @export
-     * @description  component : feature 
-     * @param {object}
-     * @return {HTMLElement} component generated HTML
-    */
+  * @function Feature
+  * @export
+  * @description  component : feature 
+  * @param {string} imgSrc - img source
+  * @param {string} imgAlt - img alt
+  * @param {string} title - title
+  * @param {string} description - description
+  * @return {HTMLElement} component generated HTML
+*/
 export default function Feature({imgSrc, imgAlt, title, description}) {
     return (
         <div className={styles.featureItem}>
@@ -21,7 +25,6 @@ export default function Feature({imgSrc, imgAlt, title, description}) {
         </div>
     )
 }
-
 Feature.prototype = {
     imgSrc: PropTypes.string,
     imgAlt: PropTypes.string,
