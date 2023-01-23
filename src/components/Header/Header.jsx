@@ -2,16 +2,15 @@
 import styles from './header.module.css'
 //logo
 import logo from '../../assets/argentBankLogo.png'
-
+//react
 import {Link} from "react-router-dom"
-
 import { useEffect } from "react";
 import { useSelector, useDispatch} from "react-redux"
-
+//redux
 import { selectFirstName } from '../../redux/selectors'
 import { selectToken } from '../../redux/selectors';
-
 import { getFirstName } from "../../redux/features/firstName"
+// api data
 import { getLoginFetch } from '../../utils/api'
 
 /**
@@ -38,7 +37,7 @@ export default function Header() {
                    dispatch(getFirstName(obj.firstName))
                })
            }
-       }, [token, dispatch])
+       },[token, dispatch] )
 
     return (
         <nav className={styles.mainNav}>

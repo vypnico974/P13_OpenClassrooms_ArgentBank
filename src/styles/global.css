@@ -14,10 +14,6 @@ body {
     min-height: 100vh;
 }
   
-/* .main {
-    flex: 1;
-} */
-
 
 @media screen and (min-width:1440px){
     html {

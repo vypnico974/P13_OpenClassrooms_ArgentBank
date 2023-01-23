@@ -1,14 +1,14 @@
 //css
 import styles from './login.module.css'
-
+// prop types
 import PropTypes from 'prop-types'
-
+//react
 import { useState} from "react" 
 import { Navigate } from "react-router-dom"
-
-import { getLogin } from '../../utils/api'
-
 import { useSelector,useDispatch } from "react-redux"
+// api data
+import { getLogin } from '../../utils/api'
+//redux
 import { getToken } from '../../redux/features/token'
 import { selectToken } from '../../redux/selectors'
 
@@ -33,7 +33,7 @@ export default function Login() {
     // Local storage Token
     const localStorageToken =  localStorage.getItem("token")
 
-    // use dispatch
+    // Use dispatch
     const dispatch = useDispatch()
 
     /**
@@ -86,7 +86,7 @@ export default function Login() {
             } else {
                 setLoginErreur(obj.message)
             }
-        }, [])
+        },)
     }
     handleSubmit.prototype = {
         event: PropTypes.object.isRequired,

@@ -1,6 +1,6 @@
 //css
 import styles from './hero.module.css'
-
+// prop types
 import PropTypes from 'prop-types'
 
 /**

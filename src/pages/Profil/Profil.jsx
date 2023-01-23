@@ -1,6 +1,6 @@
 /* css  */
 import styles from './profil.module.css'
-// proptypes
+// prop types
 import PropTypes from 'prop-types'
 //react
 import { useState , useEffect} from 'react'
@@ -44,6 +44,8 @@ export default function Profil() {
   // At least 2 alphabetic characters
   const regex = /^[A-zÀ-ú-']{2,}$/
 
+  
+
   //Use effect
   useEffect(() => {
     // if user connected, extract in store : firstName and lastName
@@ -77,7 +79,6 @@ export default function Profil() {
     }else{
       if( (newFirstName!== firstName) || (newLastName!== lastName)){
         const fullName = {"firstName": newFirstName, "lastName": newLastName}
-        // console.log(fullName)
         saveUserProfil(token, fullName)
         }        
       setFormatErrorName("")

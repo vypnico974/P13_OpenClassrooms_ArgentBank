@@ -4,6 +4,10 @@ import PropTypes from 'prop-types'
 // API base URL
 const BASE_URL = "http://localhost:3001/api/v1/"
 
+// error message
+const ERROR_MESSAGE = "Error. Please retry later."
+
+
 
 /**
  * @function getLoginData
@@ -13,23 +17,25 @@ const BASE_URL = "http://localhost:3001/api/v1/"
  * @return {object} object login data format
  */
 export function getLoginData(data) {
-    //if no connection error to the web server
-    if(data.status !== 400) {
-        const obj = {
-            status: data.status,
-            message: data.message,
-            token: data.body.token
-        }    
-        return obj
-       //if connection error to the web server
-    } else {
-        const obj = {
-            status: data.status,
-            message: data.message,
+    if(data) {
+         //if no connection error to the web server
+        if(data.status !== 400) {
+            const obj = {
+                status: data.status,
+                message: data.message,
+                token: data.body.token
+            }    
+            return obj
+        //if connection error to the web server
+        } else {
+            const obj = {
+                status: data.status,
+                message: data.message,
+            }
+            console.log(obj.status,obj.message)    
+            return obj
         }
-        console.log(obj.status,obj.message)    
-        return obj
-    }
+    }  
 }
 getLoginData.prototype = {
     data: PropTypes.object.isRequired,
@@ -44,26 +50,28 @@ getLoginData.prototype = {
  * @return {object} object login fetch format
  */
 export function getLoginFetchData(data) {
-    if(data.body !== undefined) {
-        const obj = {
-            id: data.body.id,
-            status: data.status,
-            email: data.body.email,
-            firstName: data.body.firstName,
-            lastName: data.body.lastName
+    if (data){
+        if(data.body !== undefined) {
+            const obj = {
+                id: data.body.id,
+                status: data.status,
+                email: data.body.email,
+                firstName: data.body.firstName,
+                lastName: data.body.lastName
+            }
+            return obj
+        } else {
+            console.log(data.status, data.status) 
+            const obj = {
+                id: null,
+                status: 0,
+                email: "",
+                firstName: "",
+                lastName: ""
+            }   
+         return obj
         }
-        return obj
-    } else {
-        console.log(data.status, data.status) 
-        const obj = {
-            id: null,
-            status: 0,
-            email: "",
-            firstName: "",
-            lastName: ""
-        }   
-     return obj
-    }
+    }   
 }
 getLoginData.prototype = {
     data: PropTypes.object.isRequired,
@@ -78,12 +86,22 @@ getLoginData.prototype = {
  * @return {object} object user profil data format
  */
 export function saveUserProfilData(data) {
-    const obj = {
-        status: data.status,
-        message: data.message,
-    }
-    console.log(data.status, data.message )
-    return obj
+    if (data) {
+        if(data.status !== 400){
+            const obj = {
+                status: data.status,
+                message: data.message,
+            }
+            return obj
+        }
+        else{
+            const obj = {
+                status: 404,
+                message: "Error",
+            }
+            return obj
+        } 
+    }  
 }
 saveUserProfilData.prototype = {
     data: PropTypes.object.isRequired,
@@ -99,8 +117,7 @@ saveUserProfilData.prototype = {
  */
 export const getLogin = async (identifiants) => {
     const API_URL = BASE_URL + "user/login"
-   // console.log(API_URL)
-
+   
     const loginResponse = await fetch(API_URL, {
         method: "POST",
         body: JSON.stringify(identifiants),
@@ -109,6 +126,7 @@ export const getLogin = async (identifiants) => {
         }
         
     }).then((response) => response.json())
+    .catch((error)=> alert(ERROR_MESSAGE + error))
 
     // response login format
     return await getLoginData(loginResponse) 
@@ -137,8 +155,8 @@ export const getLoginFetch = async (token) => {
             "Authorization": "Bearer" + token
         }        
     }).then((response) => response.json())
+    .catch((error)=> alert(ERROR_MESSAGE + error))
 
-   // console.log("getLoginFetch response", loginFetchResponse)
     // response login format
     return await getLoginFetchData(loginFetchResponse)
 }
@@ -164,9 +182,10 @@ export const saveUserProfil = async (token, fullName) => {
             "Content-Type": "application/json",
             "Authorization": "Bearer" + token
         }     
-    }).then((response) => response.json());
-
-     // response save user profil data format 
+    }).then((response) => response.json())
+    .catch((error)=> alert(ERROR_MESSAGE + error))
+        
+    // response save user profil data format 
     return await saveUserProfilData(saveUserProfilResponse)
 }
 saveUserProfil.prototype = {

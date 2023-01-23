@@ -1,6 +1,6 @@
 //css
 import styles from './account.module.css'
-// propTypes
+// prop types
 import PropTypes from 'prop-types'
 
 
