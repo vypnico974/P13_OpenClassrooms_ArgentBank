@@ -12,7 +12,7 @@ const ERROR_MESSAGE = "Error. Please retry later."
 /**
  * @function getLoginData
  * @export
- * @description get login data
+ * @description get login data (model)
  * @param {object} data - data login
  * @return {object} object login data format
  */
@@ -45,7 +45,7 @@ getLoginData.prototype = {
 /**
  * @function getLoginFetchData
  * @export
- * @description get login fetch
+ * @description get login fetch (model)
  * @param {object}  data - user login fetch data
  * @return {object} object login fetch format
  */
@@ -61,7 +61,7 @@ export function getLoginFetchData(data) {
             }
             return obj
         } else {
-            console.log(data.status, data.status) 
+            console.log(data.status, "unauthorized") 
             const obj = {
                 id: null,
                 status: 0,
@@ -81,7 +81,7 @@ getLoginData.prototype = {
 /**
  * @function saveUserProfilData
  * @export
- * @description get login fetch
+ * @description get login fetch data (model). 
  * @param {object}  data - save user profil data
  * @return {object} object user profil data format
  */
@@ -111,7 +111,8 @@ saveUserProfilData.prototype = {
 /**
  * @function getLogin
  * @export
- * @description get user login
+ * @description get user login. Send a POST request to the API
+ *  with the user's email and password, and returns the response as a JSON object.
  * @param {object} identifiants - user identifiants 
  * @return {object} login response
  */
@@ -140,7 +141,8 @@ saveUserProfilData.prototype = {
 /**
  * @function getLoginFetch
  * @export
- * @description user login  fetch data
+ * @description user login fetch data. Send a POST request to the API
+ *  with the token in the header, and return the response as a JSON object.
  * @param {object} token - token 
  * @return {object} login response
  */
@@ -168,7 +170,9 @@ getLoginFetch.prototype = {
 /**
  * @function saveUserProfil
  * @export
- * @description save profil : user the new full name 
+ * @description save profil : user the new full name. Take the first name and the last name and
+ *  sent from the Edit Form and the login token as parameters, build a request body
+ *  with the new user name and send a PUT request to the API to change it in database.
  * @param {object} token - token 
  * @return {object} login response
  */

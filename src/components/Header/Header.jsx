@@ -4,11 +4,11 @@ import styles from './header.module.css'
 import logo from '../../assets/argentBankLogo.png'
 //react
 import {Link} from "react-router-dom"
-import { useEffect } from "react";
+import { useEffect} from "react"
 import { useSelector, useDispatch} from "react-redux"
 //redux
 import { selectFirstName } from '../../redux/selectors'
-import { selectToken } from '../../redux/selectors';
+import { selectToken } from '../../redux/selectors'
 import { getFirstName } from "../../redux/features/firstName"
 // api data
 import { getLoginFetch } from '../../utils/api'
@@ -35,9 +35,13 @@ export default function Header() {
                user.then(obj => {
                    //To send the action : getFirstName
                    dispatch(getFirstName(obj.firstName))
-               })
-           }
-       },[token, dispatch] )
+                   if (obj.id === null) {
+                    // invalid token : remove localStorage token
+                    localStorage.removeItem("token")
+                   }
+                })
+            }
+        },[token, dispatch] )
 
     return (
         <nav className={styles.mainNav}>
@@ -49,7 +53,6 @@ export default function Header() {
                 />  
                 <h1 className={styles.srOnly}>Argent Bank</h1>          
             </Link>
-
             <div>
             {/*user no connected*/}    
             { ((token === 0) ||(token === null) ) && 

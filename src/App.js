@@ -25,15 +25,17 @@ import './styles/global.css'
 export default function App() {
   return (
    <>
-    <Header/>
-    <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profil" element={<Profil />} />
+    <Header/>  {/* Header for every page */}
+
+    <Routes> {/* the differents routes for this website  */}
+        <Route exact path="/" element={<Home />} />  
+        <Route path="/login" element={<Login />} />  
+        <Route path="/profil" element={<Profil />} /> 
         <Route path="/logout" element={<Logout />} />
         <Route path="*" element={<Error />} />
     </Routes>
-    <Footer text="Copyright 2020 Argent Bank" />
+
+    <Footer text="Copyright 2020 Argent Bank" />   {/* Footer for every page */}
    </>
   )
 }

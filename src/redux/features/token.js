@@ -5,7 +5,7 @@ const initialState = {
     value: localStorage.getItem("token") || null
 }
 
-// slice : allows to define action and reducer for token
+// creating a slice of the store : : allows to define action and reducer for token
 export const tokenSlice = createSlice({
     // slice name
     name: "token",

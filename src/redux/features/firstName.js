@@ -5,7 +5,7 @@ const initialState = {
     value: ""
 }
 
-// slice : allows to define action and reducer for firstName
+//  creating a slice of the store : allows to define action and reducer for firstName
 export const firstNameSlice = createSlice({
     // slice name
     name: "firstName",
