@@ -36,9 +36,9 @@ export default function Header() {
                    //To send the action : getFirstName
                    dispatch(getFirstName(obj.firstName))
                    if (obj.id === null) {
-                    // invalid token : remove localStorage token
-                    localStorage.removeItem("token")
-                   }
+                       // invalid token : remove localStorage token
+                       localStorage.removeItem("token")
+                    }
                 })
             }
         },[token, dispatch] )
