@@ -5,11 +5,13 @@ import PropTypes from 'prop-types'
 //react
 import { useState} from "react" 
 import { Navigate } from "react-router-dom"
+//react-redux
 import { useSelector,useDispatch } from "react-redux"
 // api data
 import { getLogin } from '../../utils/api'
-//redux
+//redux action
 import { getToken } from '../../redux/features/token'
+//redux selector
 import { selectToken } from '../../redux/selectors'
 
 
@@ -82,8 +84,8 @@ export default function Login() {
                 setLoginStatus(obj.status)
                 // console.log("obj token :", obj.token)
                 tokenAdd(obj.token)
-             //connection error
             } else {
+                //connection error
                 setLoginErreur(obj.message)
             }
         },)
@@ -93,7 +95,7 @@ export default function Login() {
     }
 
     //the conditions to redirect : profil page
-    if( ((token !== 0) && (token !== null)) || 
+    if( (token !== null) || 
         (localStorageToken !== null) ||
         (loginStatus === 200) )  return <Navigate to="/profil" /> 
 

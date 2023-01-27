@@ -30,7 +30,7 @@ import Account from '../../components/Account/Account'
  */
 export default function Profil() {
 
-   // Use Selector for extract :token, firstName and lastName (state)
+   // Use Selector for extract :token, firstName and lastName (store)
   const token = useSelector(selectToken)
   const firstName = useSelector(selectFirstName)
   const lastName = useSelector(selectLastName)
@@ -49,7 +49,7 @@ export default function Profil() {
   //Use effect
   useEffect(() => {
     // if user connected, extract in store : firstName and lastName
-    if ((token !== 0 ) && (token !== null )) {
+    if (token !== null) {
        // user login fetch data
       const user = getLoginFetch(token)
       //console.log("user:",user)

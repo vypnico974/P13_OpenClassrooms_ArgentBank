@@ -29,5 +29,7 @@ export default function Account({title,money, balanceType}) {
     )
 }
 Account.prototype = {
-    event: PropTypes.object.isRequired,
+    title: PropTypes.string,
+    money: PropTypes.string,
+    balanceType: PropTypes.string,
 }

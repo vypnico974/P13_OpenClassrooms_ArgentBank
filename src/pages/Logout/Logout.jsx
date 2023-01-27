@@ -1,7 +1,9 @@
+//react
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
 import { Navigate } from "react-router-dom"
-
+//react-redux
+import { useDispatch } from "react-redux"
+//redux actions
 import { getToken } from "../../redux/features/token"
 import { getFirstName } from "../../redux/features/firstName"
 import { getLastName } from "../../redux/features/lastName"
@@ -17,7 +19,7 @@ export default function Logout() {
     const dispatch = useDispatch()
     useEffect(() => {
         // to send next actions
-        dispatch(getToken(0))
+        dispatch(getToken(null))
         dispatch(getFirstName(""))
         dispatch(getLastName(""))
         // remove localStorage token

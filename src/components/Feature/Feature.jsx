@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 /**
   * @function Feature
   * @export
-  * @description  component : feature 
+  * @description  component : features 
   * @param {string} imgSrc - img source
   * @param {string} imgAlt - img alt
   * @param {string} title - title

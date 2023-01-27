@@ -2,6 +2,11 @@
 
 ![Author](<https://img.shields.io/badge/Author-Nicolas%20Vyplasil-green>)
 
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://dev.to/envoy_/150-badges-for-github-pnk)
+[![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)](https://dev.to/envoy_/150-badges-for-github-pnk)
+
+
+
 ## Prerequisites
 
 - [NodeJS ( >=version 12  && <= version16.13.2)](https://nodejs.org/en/)
@@ -41,6 +46,12 @@
     - with yarn :
     yarn start
 - Port: http://localhost:3000/
+
+
+
+![logo](https://raw.githubusercontent.com/vypnico974/P13_OpenClassrooms_ArgentBank/main/src/assets/screen1_presentation.png)
+
+![logo](https://raw.githubusercontent.com/vypnico974/P13_OpenClassrooms_ArgentBank/main/src/assets/screen2_presentation.png)
 
 
 

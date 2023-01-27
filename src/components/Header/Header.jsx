@@ -5,11 +5,14 @@ import logo from '../../assets/argentBankLogo.png'
 //react
 import {Link} from "react-router-dom"
 import { useEffect} from "react"
+//react-redux
 import { useSelector, useDispatch} from "react-redux"
-//redux
+//redux selector
 import { selectFirstName } from '../../redux/selectors'
 import { selectToken } from '../../redux/selectors'
+//redux action
 import { getFirstName } from "../../redux/features/firstName"
+import { getToken } from '../../redux/features/token'
 // api data
 import { getLoginFetch } from '../../utils/api'
 
@@ -24,19 +27,22 @@ export default function Header() {
        // Use Selector for extract: firstName and token (state)
        const firstName = useSelector(selectFirstName)
        const token = useSelector(selectToken)
+
+    //    console.log("token:",token )
    
        // Use dispatch
        const dispatch = useDispatch()
        // Use Effect
        useEffect(() => {
-           if((token !== 0 ) && (token !== null )) {
+           if(token !== null ) {
               // Get data login user
                const user = getLoginFetch(token)
                user.then(obj => {
                    //To send the action : getFirstName
                    dispatch(getFirstName(obj.firstName))
                    if (obj.id === null) {
-                       // invalid token : remove localStorage token
+                       // invalid token : remove token(store) and localStorage token
+                       dispatch(getToken(null))
                        localStorage.removeItem("token")
                     }
                 })
@@ -55,13 +61,13 @@ export default function Header() {
             </Link>
             <div>
             {/*user no connected*/}    
-            { ((token === 0) ||(token === null) ) && 
+            { (token === null) && 
             <Link to='/login' className={styles.mainNavItem}>
                 <i className="fa fa-user-circle"></i>
                    <span className={styles.signIn}>Sign In</span>           
             </Link> }
             {/*user connected*/}  
-            { ((token !== 0) && (token !== null) ) && 
+            { (token !== null) && 
             <>
                 <Link to="/profil" className={styles.mainNavItem}>
                     <i className="fa fa-user-circle"></i>
