@@ -32,10 +32,8 @@ export default function Login() {
 
     // Use Selector for recover :token (state)
     const token = useSelector(selectToken)
-    // Local storage Token
-    const localStorageToken =  localStorage.getItem("token")
 
-    // Use dispatch
+    // Use dispatch, for send the actions
     const dispatch = useDispatch()
 
     /**
@@ -79,8 +77,8 @@ export default function Login() {
         event.preventDefault()
         const login = getLogin({"email": email, "password": password})       
         login.then(obj => {
-             // no connection error to the web server
-            if(obj.status !== 400) {
+             // no connection error
+            if((obj.status !== 400) && (obj.status !== 401) && (obj.status !== 500)) {
                 setLoginStatus(obj.status)
                 // console.log("obj token :", obj.token)
                 tokenAdd(obj.token)
@@ -95,16 +93,16 @@ export default function Login() {
     }
 
     //the conditions to redirect : profil page
-    if( (token !== null) || 
-        (localStorageToken !== null) ||
-        (loginStatus === 200) )  return <Navigate to="/profil" /> 
+    if( (token !== null) ||(loginStatus === 200) ) {
+        return <Navigate to="/profil" /> 
+    } 
 
     return(
         <div className={styles.container}>
           <main className={`${styles.main} ${styles.bgDark}`}>
             <section className={styles.signInContent}>
               <i className="fa fa-user-circle"></i>
-              <h1>Sign In</h1>
+              <h1 className={styles.title}>Sign In</h1>
               <form onSubmit={handleSubmit}>
                 <div className={styles.inputWrapper}>
                     <label className={styles.bold} htmlFor="username">Username</label>

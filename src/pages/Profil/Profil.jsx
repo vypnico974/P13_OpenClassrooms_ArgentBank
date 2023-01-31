@@ -39,7 +39,7 @@ export default function Profil() {
   const [newFirstName, setNewFirstName] = useState('')
   const [newLastName, setNewLastName] = useState('')
   const [formatErrorName, setFormatErrorName] = useState('')
-  // Use dispatch
+  // Use dispatch, for send the actions
   const dispatch = useDispatch()
   // At least 2 alphabetic characters
   const regex = /^[A-zÀ-ú-']{2,}$/
@@ -79,6 +79,7 @@ export default function Profil() {
     }else{
       if( (newFirstName!== firstName) || (newLastName!== lastName)){
         const fullName = {"firstName": newFirstName, "lastName": newLastName}
+        // save  user profil data
         saveUserProfil(token, fullName)
         }        
       setFormatErrorName("")
@@ -107,7 +108,7 @@ export default function Profil() {
   }    
 
   // if no authorize, redirection login page
-  if ((token === 0) || (token === null) ) return <Navigate to="/login" />
+  if (token === null) return <Navigate to="/login" />
   
   return (
     <main className={`${styles.main} ${styles.bgDark}`}>

@@ -30,7 +30,7 @@ export default function Header() {
 
     //    console.log("token:",token )
    
-       // Use dispatch
+       // Use dispatch, for send the actions
        const dispatch = useDispatch()
        // Use Effect
        useEffect(() => {
@@ -42,6 +42,7 @@ export default function Header() {
                    dispatch(getFirstName(obj.firstName))
                    if (obj.id === null) {
                        // invalid token : remove token(store) and localStorage token
+                       //To send the action : getToken
                        dispatch(getToken(null))
                        localStorage.removeItem("token")
                     }

@@ -18,15 +18,15 @@ const ERROR_MESSAGE = "Error. Please retry later."
  */
 export function getLoginData(data) {
     if(data) {
-         //if no connection error to the web server
-        if(data.status !== 400) {
+         //if no connection error
+        if((data.status !== 400) && (data.status !== 401) && (data.status !== 500)) {
             const obj = {
                 status: data.status,
                 message: data.message,
                 token: data.body.token
             }    
             return obj
-        //if connection error to the web server
+        //if connection error
         } else {
             const obj = {
                 status: data.status,
@@ -87,7 +87,7 @@ getLoginData.prototype = {
  */
 export function saveUserProfilData(data) {
     if (data) {
-        if(data.status !== 400){
+        if((data.status !== 400) && (data.status !== 401) && (data.status !== 500)){
             const obj = {
                 status: data.status,
                 message: data.message,

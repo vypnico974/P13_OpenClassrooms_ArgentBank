@@ -55,7 +55,7 @@ paths:
                 '200':
                     description: current month transactions sucessfully loaded
                     schema:
-                        $ref: '#/definitions/MonthTransactionsResponse'
+                        $ref: '#/definitions/TransactionsMonthResponse'
                 '400':
                     description: Invalid Fields
                 '401':
@@ -159,7 +159,7 @@ securityDefinitions:
         
         
 definitions:
-    MonthTransactionsResponse:
+    TransactionsMonthResponse:
       type: object
       properties:
         status:
@@ -176,6 +176,30 @@ definitions:
               type: array
               items:
                 $ref: '#/definitions/Transaction'
+          example : [
+            {
+            "transactionId": f8fswj*89fgdj67890pm43657uytr4ezhh2,
+            "accountId": 202303tt99765gtyh6578uiop,
+            "date": '2023-01-07T03:11:57.468+00:00',
+            "description": Golden Sun Bakery,
+            "amount": 50,
+            "balance": 2187.78,
+            "type": Electronic,
+            "category": Food,
+            "notes": Good food,
+            },
+            {
+            "transactionId": f8fj*89fgdj67890pm43657uythhhr4e2gty786,
+            "accountId": 2023039ff9765gtyh657gggg8kjo987,
+            "date": '2023-01-09T03:08:57.468+00:00',
+            "description": Example,
+            "amount": 5900,
+            "balance": 245187.9,
+            "type": Electronic,
+            "category": House,
+            "notes": Good House,
+            }
+          ]
      
     TransactionResponse:
       type: object
@@ -214,9 +238,9 @@ definitions:
           example: 20230399765gtyh6578uiop
         date:
           type: string
-          format: date-time
+          format: date
           description: transaction date
-          example: '2023-01-20T18:00:00'
+          example: '2023-01-07T03:11:57.468+00:00'
         description:
           type: string
           description: transaction description

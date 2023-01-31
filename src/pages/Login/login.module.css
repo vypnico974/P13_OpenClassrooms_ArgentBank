@@ -23,6 +23,7 @@
     margin-top: 3rem;
     margin-bottom: 5rem;
     padding: 2rem;
+
 }
 .signInIcon {
     font-size: 5rem;
@@ -43,6 +44,12 @@
     text-align: left;
     margin-bottom: 1rem;
 }
+
+.inputWrapper input{
+    padding: 5px;
+    font-size: 1.2rem;
+}
+
 .inputRemember {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -56,12 +63,15 @@
     display: block;
     width: 100%;
     padding: 8px;
+    border:0;
     font-size: 1.1rem;
     font-weight: bold;
     margin-top: 1rem;
     border-color: #00bc77;
     background-color: #00bc77;
     color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
 }
 .bold{
     font-weight: bold;
@@ -70,6 +80,10 @@
     color:red;
     font-weight: 700;
     margin-top:1rem;
+}
+
+.title{
+    font-size: 1.5rem;
 }
 
 
